@@ -1,5 +1,6 @@
 
 var Inventory = require('../models/inventory')
+var seedData = require('./seed')
 
 var getAll = (req, res) => {
   Inventory.find({})
@@ -45,11 +46,41 @@ var remove = (req, res) => {
   })
 }
 
+var seed = (req, res) => {
+  seedData.forEach(d => {
+    let invent = new Inventory({
+      item: d.item,
+      category: d.category,
+      price: d.price,
+      total: d.total
+    })
+    invent.save()
+    .then(created => {
+      res.send(created)
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
+  })
+}
+
+var removeAll = (req, res) => {
+  Inventory.remove({})
+  .then(removed => {
+    res.send(removed)
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
+}
+
 
 module.exports = {
   getAll,
   getOne,
   update,
   remove,
-  create
+  create,
+  seed,
+  removeAll
 }
