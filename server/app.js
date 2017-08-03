@@ -39,8 +39,8 @@ app.use(cors())
 
 app.use('/', routes);
 app.use('/api/users', users);
-app.use('/api/transactions', users);
-app.use('/api/inventories', users);
+app.use('/api/transactions', transactions);
+app.use('/api/inventories', inventories);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

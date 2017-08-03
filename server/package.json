@@ -17,6 +17,7 @@
     "debug": "~2.2.0",
     "dotenv": "^4.0.0",
     "express": "~4.13.4",
+    "jsonfile": "^3.0.1",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.11.5",
     "morgan": "~1.7.0",
