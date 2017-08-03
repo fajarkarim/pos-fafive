@@ -1,5 +1,6 @@
 
 var Transaction = require('../models/transaction')
+var Inventory = require('../models/inventory')
 
 var getAll = (req, res) => {
   Transaction.find({})
@@ -22,6 +23,29 @@ var getOne = (req, res) => {
 }
 
 var create = (req, res) => {
+  let transaction = new Transaction({
+    total: req.body.total,
+    item_list: req.body.item_list,
+  })
+  transaction.save()
+  .then(created => {
+    let items = req.body.item_list
+    items.forEach(item => {
+      let itemID = item.split(',')[0]
+      let stock = item.split(',')[1]
+      Inventory.findById(itemID)
+      .then(i => {
+        i.stock = i.stock - parseInt(stock)
+      })
+    })
+    res.send(created)
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
+}
+
+var checkout = (req, res) => {
 
 }
 
