@@ -1,10 +1,13 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
+const usersCtrl = require('../models/usersController')
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
-  res.send({ message: 'this endpoint should be used for user listing' });
-});
+router.get('/', usersCtrl.getAll);
+router.get('/:id', usersCtrl.getOne);
+router.post('/', usersCtrl.create);
+router.put('/:id', usersCtrl.update)
+router.delete('/:id', usersCtrl.remove)
 
 module.exports = router;
