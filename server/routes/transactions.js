@@ -1,7 +1,7 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
-const transCtrl = require('../models/transactionController')
+const transCtrl = require('../controllers/transactionsController')
 
 /* GET users listing. */
 router.get('/', transCtrl.getAll);

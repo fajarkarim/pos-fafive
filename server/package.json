@@ -9,6 +9,7 @@
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "~1.15.1",
     "compression": "^1.7.0",
     "cookie-parser": "~1.4.3",
@@ -16,6 +17,7 @@
     "debug": "~2.2.0",
     "dotenv": "^4.0.0",
     "express": "~4.13.4",
+    "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.11.5",
     "morgan": "~1.7.0",
     "nodemon": "^1.11.0"

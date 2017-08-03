@@ -21,12 +21,16 @@ var getOne = (req, res) => {
   })
 }
 
+var create = (req, res) => {
+
+}
+
 var update = (req, res) => {
   Inventory.findByIdAndUpdate(req.params.id, req.body, { new: true })
   .then(updated => {
     res.send(updated)
   })
-  .catch(err -> {
+  .catch(err => {
     res.status(500).send(err)
   })
 }
@@ -46,5 +50,6 @@ module.exports = {
   getAll,
   getOne,
   update,
-  remove
+  remove,
+  create
 }

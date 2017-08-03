@@ -1,7 +1,7 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
-const inventCtrl = require('../models/inventoriesController')
+const inventCtrl = require('../controllers/inventoriesController')
 
 /* GET users listing. */
 router.get('/', inventCtrl.getAll);
