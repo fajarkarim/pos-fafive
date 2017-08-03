@@ -5,6 +5,8 @@ const express = require('express'),
       logger = require('morgan'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
+      cors = require('cors'),
+      compression = require('compression'),
 
       //All Route Files
       routes = require('./routes/index'),
@@ -13,13 +15,22 @@ const express = require('express'),
       //Express Instance
       app = express();
 
-//load environment variables with dotenv
+app.use(compression({filter: shouldCompress}))
+
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    return false
+  }
+  return compression.filter(req, res)
+}
+
 require('dotenv').config()
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors())
 
 app.use('/', routes);
 app.use('/users', users);
