@@ -1,8 +1,8 @@
 
-var User = require('../models/transaction')
+var Transaction = require('../models/transaction')
 
 var getAll = (req, res) => {
-  User.find({})
+  Transaction.find({})
   .then(transactions => {
     res.send(transactions)
   })
@@ -12,7 +12,7 @@ var getAll = (req, res) => {
 }
 
 var getOne = (req, res) => {
-  User.findById(req.params.id)
+  Transaction.findById(req.params.id)
   .then(transaction => {
     res.send(transaction)
   })
@@ -26,7 +26,7 @@ var create = (req, res) => {
 }
 
 var update = (req, res) => {
-  User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Transaction.findByIdAndUpdate(req.params.id, req.body, { new: true })
   .then(updated => {
     res.send(updated)
   })
@@ -36,7 +36,7 @@ var update = (req, res) => {
 }
 
 var remove = (req, res) => {
-  User.findByIdAndRemove(req.params.id)
+  Transaction.findByIdAndRemove(req.params.id)
   .then(removed => {
     res.send(removed)
   })

@@ -12,6 +12,18 @@ var getAll = (req, res) => {
   })
 }
 
+var sortBy = (req, res) => {
+  Inventory.find({ category: req.params.name })
+  .sort('-createdAt')
+  .exec()
+  .then(invents => {
+    res.send(invents)
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
+}
+
 var getOne = (req, res) => {
   Inventory.findById(req.params.id)
   .then(inventory => {
@@ -82,5 +94,6 @@ module.exports = {
   remove,
   create,
   seed,
-  removeAll
+  removeAll,
+  sortBy
 }

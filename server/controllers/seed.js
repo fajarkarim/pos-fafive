@@ -14,7 +14,7 @@ var data =
   },
   {
     item: 'Sabun Mandi',
-    category: 'rumah tangga',
+    category: 'rumah-tangga',
     price: 30000,
     stock: 5
   },
