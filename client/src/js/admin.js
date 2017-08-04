@@ -1,8 +1,10 @@
-var products = [
-  {id: 1, name: 'Angular', description: 'Superheroic JavaScript MVW Framework.', price: 100},
-  {id: 2, name: 'Ember', description: 'A framework for creating ambitious web applications.', price: 100},
-  {id: 3, name: 'React', description: 'A JavaScript Library for building user interfaces.', price: 100}
-];
+
+// var products = [
+//   // {id: 1, name: 'Angular', description: 'Superheroic JavaScript MVW Framework.', price: 100, stock: 30, date: new Date(), remark: 'ok'},
+//   // {id: 2, name: 'Ember', description: 'A framework for creating ambitious web applications.', price: 100, stock: 30, date: new Date(), remark: 'ok'},
+//   // {id: 3, name: 'React', description: 'A JavaScript Library for building user interfaces.', price: 100, stock: 30, date: new Date(), remark: 'ok'}
+// ];
+var products = []
 
 function findProduct (productId) {
   return products[findProductKey(productId)];
@@ -10,7 +12,7 @@ function findProduct (productId) {
 
 function findProductKey (productId) {
   for (var key = 0; key < products.length; key++) {
-    if (products[key].id == productId) {
+    if (products[key].item == productId) {
       return key;
     }
   }
@@ -29,6 +31,21 @@ var List = Vue.extend({
       return product.name.indexOf(self.searchKey) !== -1
     })
   }
+},
+methods: {
+  getItems: function () {
+    let self = this
+    axios.get('http://localhost:3000/api/inventories')
+    .then(function (response) {
+      self.products = response.data
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+},
+created () {
+  this.getItems()
 }
 });
 
@@ -74,7 +91,7 @@ var ProductDelete = Vue.extend({
 var AddProduct = Vue.extend({
   template: '#add-product',
   data: function () {
-    return {product: {name: '', description: '', price: ''}
+    return {product: {name: '', description: '', price: '', stock: '', date: '', remark: ''}
     }
   },
   methods: {
@@ -84,7 +101,10 @@ var AddProduct = Vue.extend({
         id: Math.random().toString().split('.')[1],
         name: product.name,
         description: product.description,
-        price: product.price
+        price: product.price,
+        stock: product.stock,
+        date: product.datein,
+        remark: product.remark
       });
       router.push('/');
     }
@@ -96,7 +116,7 @@ var router = new VueRouter({
     {path: '/product/:product_id', component: Product, name: 'product'},
     {path: '/add-product', component: AddProduct},
     {path: '/product/:product_id/edit', component: ProductEdit, name: 'product-edit'},
-  {path:   '/product/:product_id/delete', component: ProductDelete, name: 'product-delete'}
+    {path: '/product/:product_id/delete', component: ProductDelete, name: 'product-delete'}
 ]});
 
 new Vue({
