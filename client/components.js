@@ -1,3 +1,34 @@
+
+
+Vue.component('app-container', {
+  props: ['msgChild', 'items', 'total', 'cart'],
+  template: `
+  <div class="col-md-6">
+    <h1>{{ msgChild }}</h1>
+    <item-data
+    v-for="(item, index) in items" 
+    :name="index+1 + '. ' + item.name" 
+    :short-desc="item.shortDesc"
+    :total="item.stock" 
+    :idx="index"
+    :key="index"
+    @tambah="masukKeranjang">
+    </item-data>
+  </div>`,
+  methods: {
+    masukKeranjang (urutan) {
+      console.log(`ini loh yang mask ${urutan}`);
+      this.items[urutan].stock -= 1
+      this.cart.push(this.items[urutan].name)
+      console.log(`berkurang 1 ${this.items[urutan].stock}`);
+      console.log(this.items[urutan].name);
+    },
+    created(){
+      console.log(total);
+    }
+  }
+})
+
 Vue.component('item-data', {
   props: ['name', 'short-desc', 'total', 'idx'],
   template: `
@@ -14,33 +45,7 @@ Vue.component('item-data', {
   methods: {
     addToCart () {
       console.log(this.idx)
-      this.$emit('add', this.idx)
-    }
-  }
-})
-
-Vue.component('app-container', {
-  props: ['msgChild', 'items', 'total'],
-  template: `
-  <div class="col-md-6">
-    <h1>{{ msgChild }}</h1>
-    <item-data
-    v-for="(item, index) in items" 
-    :name="index+1 + '. ' + item.name" 
-    :short-desc="item.shortDesc"
-    :total="item.stock" 
-    :idx="index"
-    :key="index"
-    @add="masukKeranjang">
-    </item-data>
-  </div>`,
-  methods: {
-    masukKeranjang (idx) {
-      console.log(idx);
-      this.items.splice(idx, 1)
-    },
-    created(){
-      console.log(total);
+      this.$emit('tambah', this.idx)
     }
   }
 })
