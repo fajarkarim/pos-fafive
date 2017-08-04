@@ -5,7 +5,7 @@ Vue.component('item-data', {
     <div class="panel-heading">{{ name }}</div>
     <div class="panel-body">
       <strong>Price: </strong> {{ shortDesc }} <br>
-      <strong>Stock: </strong> {{ stock }}
+      <strong>Stock: </strong> {{ total }}
     </div>
     <div class="panel-footer">
       <button type="btn" class="btn btn-xs btn-success" @click="addToCart"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
@@ -20,7 +20,7 @@ Vue.component('item-data', {
 })
 
 Vue.component('app-container', {
-  props: ['msgChild', 'items'],
+  props: ['msgChild', 'items', 'total'],
   template: `
   <div class="col-md-6">
     <h1>{{ msgChild }}</h1>
@@ -36,7 +36,11 @@ Vue.component('app-container', {
   </div>`,
   methods: {
     masukKeranjang (idx) {
+      console.log(idx);
       this.items.splice(idx, 1)
+    },
+    created(){
+      console.log(total);
     }
   }
 })
