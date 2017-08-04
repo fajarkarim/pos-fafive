@@ -6,11 +6,13 @@ var transactionSchema = new Schema({
   total: {
     type: Number
   },
-  item_list: [{ type: Schema.Types.ObjectId, ref: 'inventory' }],
+  item_list: {
+    type: Array
+  },
   invoice: {
-    type: Mixed
+    type: String
   }
-})
+}, { timestamps: true })
 
 var Transaction = mongoose.model('Transaction', transactionSchema)
 
