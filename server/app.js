@@ -7,13 +7,18 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
       compression = require('compression'),
+      mongoose = require('mongoose'),
 
       //All Route Files
       routes = require('./routes/index'),
       users = require('./routes/users'),
+      transactions = require('./routes/transactions'),
+      inventories = require('./routes/inventories'),
 
       //Express Instance
       app = express();
+
+mongoose.Promise = global.Promise
 
 app.use(compression({filter: shouldCompress}))
 
@@ -33,7 +38,9 @@ app.use(cookieParser());
 app.use(cors())
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api/users', users);
+app.use('/api/transactions', transactions);
+app.use('/api/inventories', inventories);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -65,6 +72,14 @@ app.use((err, req, res, next) => {
     error: {}
   });
 });
+
+// var DB_URL = `mongodb://fajarkarim:QvYVoASycYyDwFAp@cluster0-shard-00-00-soyt6.mongodb.net:27017,cluster0-shard-00-01-soyt6.mongodb.net:27017,cluster0-shard-00-02-soyt6.mongodb.net:27017/pos_fafega?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`
+var DB_URL = `mongodb://localhost/pos_fafega`
+mongoose.connect(DB_URL, (err) => {
+  err ? console.log(err) : console.log(`database connected`);
+})
+
+console.log(`run in port 3000`);
 
 
 module.exports = app;
