@@ -15,11 +15,11 @@ Vue.component('app-container', {
   </div>`,
   methods: {
     masukKeranjang (urutan) {
-      console.log(`ini loh yang mask ${urutan}`);
+      // console.log(`ini loh yang mask ${urutan}`);
       this.items[urutan].stock -= 1
       this.cart.push(this.items[urutan].name)
-      console.log(`berkurang 1 ${this.items[urutan].stock}`);
-      console.log(this.items[urutan].name);
+      // console.log(`berkurang 1 ${this.items[urutan].stock}`);
+      // console.log(this.items[urutan].name);
     }
   }
 })
