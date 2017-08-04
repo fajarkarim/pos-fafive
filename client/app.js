@@ -2,7 +2,7 @@ new Vue({
   el: '#app',
   data: {
     product: 'Point of Sales FA-5',
-    items: [
+    list_items: [
         {
           name: 'Aqua',
           shortDesc: 500,
@@ -23,6 +23,7 @@ new Vue({
           shortDesc: 7500,
           stock: 7
         }
-      ]
+      ],
+    list_belanja: []
   }
 })
