@@ -21,11 +21,21 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <app-container
-        :msg-child="product"
-        :items="list_items"
-        :cart="list_belanja"
-        />
+        <div class="col-md-8">
+          <app-container
+          :msg-child="product"
+          :items="list_items"
+          :cart="list_belanja" />
+        </div>
+        <div class="col-md-4">
+          <h3>Keranjang - ({{ list_belanja.length }})</h3>
+          <h3>Item Belanjaan: </h3>
+          <ol>
+            <li v-for="barang in daftarBarang">
+              {{ barang }}
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
   <!-- closing id app     -->

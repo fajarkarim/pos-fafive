@@ -25,5 +25,23 @@ new Vue({
         }
       ],
     list_belanja: []
+  },
+  methods: {
+    
+  },
+  computed: {
+    simplified: function () {
+      let jmlBelanjaan = this.list_belanja.reduce((prev, item) => {
+        if (item in prev) prev[item]++
+        else prev[item] = 1
+        return prev
+      }, {})
+      return jmlBelanjaan;
+      // this.parsed = jmlBelanjaan
+      // return this.parsed
+    },
+    daftarBarang () {
+      return Object.getOwnPropertyNames(this.simplified)
+    }
   }
 })

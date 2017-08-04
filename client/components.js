@@ -1,5 +1,3 @@
-
-
 Vue.component('app-container', {
   props: ['msgChild', 'items', 'total', 'cart'],
   template: `
@@ -22,9 +20,6 @@ Vue.component('app-container', {
       this.cart.push(this.items[urutan].name)
       console.log(`berkurang 1 ${this.items[urutan].stock}`);
       console.log(this.items[urutan].name);
-    },
-    created(){
-      console.log(total);
     }
   }
 })
