@@ -22,7 +22,8 @@ var getOne = (req, res) => {
   })
 }
 
-var create = (req, res) => {
+// create transaction and update the stock
+var checkout = (req, res) => {
   let transaction = new Transaction({
     total: req.body.total,
     item_list: req.body.item_list,
@@ -36,6 +37,16 @@ var create = (req, res) => {
       Inventory.findById(itemID)
       .then(i => {
         i.stock = i.stock - parseInt(stock)
+        i.save()
+        .then(updated => {
+          res.send(updated)
+        })
+        .catch(err => {
+          res.status(500).send(err)
+        })
+      })
+      .catch(err => {
+        res.status(500).send(err)
       })
     })
     res.send(created)
@@ -43,10 +54,6 @@ var create = (req, res) => {
   .catch(err => {
     res.status(500).send(err)
   })
-}
-
-var checkout = (req, res) => {
-
 }
 
 var update = (req, res) => {
@@ -75,5 +82,5 @@ module.exports = {
   getOne,
   update,
   remove,
-  create
+  checkout
 }

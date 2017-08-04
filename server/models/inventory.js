@@ -13,7 +13,7 @@ var inventorySchema = new Schema({
   price: {
     type: Number
   },
-  total: {
+  stock: {
     type: Number
   }
 }, { timestamps: true })

@@ -35,7 +35,17 @@ var getOne = (req, res) => {
 }
 
 var create = (req, res) => {
-
+  var invent = new Inventory({
+    total: req.body.total,
+    item_list: req.body.item_list,
+  })
+  invent.save()
+  .then(saved => {
+    res.send(saved)
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
 }
 
 var update = (req, res) => {
@@ -64,7 +74,7 @@ var seed = (req, res) => {
       item: d.item,
       category: d.category,
       price: d.price,
-      total: d.total
+      stock: d.stock
     })
     invent.save()
     .then(created => {
