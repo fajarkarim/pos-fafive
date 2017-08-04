@@ -76,11 +76,21 @@ var remove = (req, res) => {
   })
 }
 
+var removeAll = (req, res) => {
+  Transaction.remove({})
+  .then(removed => {
+    res.send(removed)
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
+}
 
 module.exports = {
   getAll,
   getOne,
   update,
   remove,
-  checkout
+  checkout,
+  removeAll
 }
