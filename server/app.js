@@ -7,6 +7,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
       compression = require('compression'),
+      mongoose = require('mongoose'),
 
       //All Route Files
       routes = require('./routes/index'),
@@ -14,6 +15,8 @@ const express = require('express'),
 
       //Express Instance
       app = express();
+
+mongoose.Promise = global.Promise
 
 app.use(compression({filter: shouldCompress}))
 
@@ -65,6 +68,13 @@ app.use((err, req, res, next) => {
     error: {}
   });
 });
+
+var DB_URL = `mongodb://fajarkarim:QvYVoASycYyDwFAp@cluster0-shard-00-00-soyt6.mongodb.net:27017,cluster0-shard-00-01-soyt6.mongodb.net:27017,cluster0-shard-00-02-soyt6.mongodb.net:27017/pos_fafega?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`
+mongoose.connect(DB_URL, (err) => {
+  err ? console.log(err) : console.log(`database connected`);
+})
+
+console.log(`run in port 3000`);
 
 
 module.exports = app;
